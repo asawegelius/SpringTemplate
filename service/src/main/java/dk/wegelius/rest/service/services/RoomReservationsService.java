@@ -1,5 +1,6 @@
 package dk.wegelius.rest.service.services;
 
+import dk.wegelius.rest.dao.entities.Reservation;
 import dk.wegelius.rest.dao.entities.Room;
 import dk.wegelius.rest.dao.repositories.RoomReservationRepository;
 import dk.wegelius.rest.dao.repositories.RoomsRepository;
@@ -23,7 +24,7 @@ public class RoomReservationsService {
 
     public List<RoomReservation> getRoomsAndReservationsForDate(Date date) {
         Iterable<Room> rooms = this.roomsRepository.findAll();
-        Iterable<dk.wegelius.rest.dao.entities.RoomReservation> roomReservations = this.roomReservationsRepository.findReservationByReservationDate(new java.sql.Date(date.getTime()));
+        Iterable<Reservation> roomReservations = this.roomReservationsRepository.findReservationByReservationDate(new java.sql.Date(date.getTime()));
         Map<Long, RoomReservation> roomReservationMap = new HashMap<>();
         rooms.forEach(room -> {
             RoomReservation roomReservation = new RoomReservation();

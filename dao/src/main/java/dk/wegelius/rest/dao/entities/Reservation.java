@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name="reservation")
-public class RoomReservation {
+public class Reservation {
     @Id
     @Column(name = "RESERVATION_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,11 +16,11 @@ public class RoomReservation {
     private Date reservationDate;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "GUEST_ID", referencedColumnName = "GUEST_ID")
     private Guest guest;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "ROOM_ID", referencedColumnName = "ROOM_ID")
     private Room room;
 
     public long getReservationId() {

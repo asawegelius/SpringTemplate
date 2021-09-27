@@ -1,8 +1,8 @@
 package dk.wegelius.rest.service.junit;
 
 import dk.wegelius.rest.dao.entities.Guest;
+import dk.wegelius.rest.dao.entities.Reservation;
 import dk.wegelius.rest.dao.entities.Room;
-import dk.wegelius.rest.dao.repositories.GuestsRepository;
 import dk.wegelius.rest.dao.repositories.RoomReservationRepository;
 import dk.wegelius.rest.dao.repositories.RoomsRepository;
 import dk.wegelius.rest.dto.models.RoomReservation;
@@ -20,7 +20,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.doReturn;
 
@@ -50,8 +49,8 @@ public class ReservationsServiceTest {
 
         String dateString = "2020-01-01";
         Date date = DateUtils.createDateFromDateString(dateString);
-        List<dk.wegelius.rest.dao.entities.RoomReservation> reservations = new ArrayList<>();
-        dk.wegelius.rest.dao.entities.RoomReservation roomReservation = new dk.wegelius.rest.dao.entities.RoomReservation();
+        List<Reservation> reservations = new ArrayList<>();
+        Reservation roomReservation = new Reservation();
         roomReservation.setReservationDate(new java.sql.Date(date.getTime()));
         reservations.add(roomReservation);
         doReturn(reservations).when(reservationsRepository).findReservationByReservationDate(new java.sql.Date(date.getTime()));
