@@ -1,6 +1,7 @@
 package dk.wegelius.rest.controller.controllers;
 
-import dk.wegelius.rest.dao.entities.Customer;
+import dk.wegelius.rest.dao.entities.CustomerEntity;
+import dk.wegelius.rest.dto.models.Customer;
 import dk.wegelius.rest.service.services.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

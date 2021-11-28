@@ -1,7 +1,8 @@
 package dk.wegelius.rest.service.junit;
 
-import dk.wegelius.rest.dao.entities.Customer;
+import dk.wegelius.rest.dao.entities.CustomerEntity;
 import dk.wegelius.rest.dao.repositories.CustomersRepository;
+import dk.wegelius.rest.dto.models.Customer;
 import dk.wegelius.rest.service.services.CustomersService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class CustomerServiceTest {
     @BeforeEach
     public void setUp() {
 
-        Customer testCustomer = new Customer();
+        CustomerEntity testCustomer = new CustomerEntity();
         testCustomer.setCustomerId(1L);
         testCustomer.setFirstName("Test");
         testCustomer.setLastName("Testingson");

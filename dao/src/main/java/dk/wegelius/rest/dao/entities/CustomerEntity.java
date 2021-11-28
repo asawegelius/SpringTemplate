@@ -5,7 +5,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name="customers")
-public class Customer {
+public class CustomerEntity {
     @Id
     @Column(name="customers_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,8 +21,16 @@ public class Customer {
     @Column(name="customers_startdate")
     private Date startDate;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_types_id", referencedColumnName = "customer_types_id")
-    private CustomerType type;
+    @JoinColumn(name = "fk_customer_types", referencedColumnName = "customer_types_id")
+    private CustomerTypeEntity customerType;
+
+    public CustomerTypeEntity getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerTypeEntity customerType) {
+        this.customerType = customerType;
+    }
 
     public long getCustomerId() {
         return customerId;
@@ -70,13 +78,5 @@ public class Customer {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
-    }
-
-    public CustomerType getType() {
-        return type;
-    }
-
-    public void setType(CustomerType type) {
-        this.type = type;
     }
 }

@@ -4,6 +4,9 @@ public class CustomerType {
     private String type;
     private String description;
 
+    public CustomerType() {}
+
+
     public String getType() {
         return type;
     }

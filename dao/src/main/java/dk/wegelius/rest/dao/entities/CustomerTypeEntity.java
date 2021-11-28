@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="customer_types")
-public class CustomerType {
+public class CustomerTypeEntity {
 
     @Id
     @Column(name="customer_types_id")

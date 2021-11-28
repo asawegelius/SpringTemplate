@@ -1,7 +1,7 @@
 package dk.wegelius.rest.dao.integration;
 
 
-import dk.wegelius.rest.dao.entities.Customer;
+import dk.wegelius.rest.dao.entities.CustomerEntity;
 import dk.wegelius.rest.dao.repositories.CustomersRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,17 +22,17 @@ public class CustomersRepositoryTest {
 
     @Test
     public void crudCustomersTest(){
-        Customer testCustomer = new Customer();
+        CustomerEntity testCustomer = new CustomerEntity();
         testCustomer.setFirstName("Test");
         testCustomer.setLastName("Testingson");
         testCustomer.setEmailAddress("test@test.dk");
         testCustomer.setPhoneNumber("12345678");
         testCustomer.setStartDate(new Date(new java.util.Date().getTime()));
-        Customer inserted = customersRepository.save(testCustomer);
-        Optional<Customer> customer = customersRepository.findById(inserted.getCustomerId());
+        CustomerEntity inserted = customersRepository.save(testCustomer);
+        Optional<CustomerEntity> customer = customersRepository.findById(inserted.getCustomerId());
         assert(customer.isPresent());
         customersRepository.delete(inserted);
-        Optional<Customer> deleted = customersRepository.findById(inserted.getCustomerId());
+        Optional<CustomerEntity> deleted = customersRepository.findById(inserted.getCustomerId());
         assert(!deleted.isPresent());
     }
 }

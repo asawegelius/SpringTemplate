@@ -2,7 +2,8 @@ package dk.wegelius.rest.controller.junit;
 
 
 import dk.wegelius.rest.controller.controllers.CustomersController;
-import dk.wegelius.rest.dao.entities.Customer;
+import dk.wegelius.rest.dao.entities.CustomerEntity;
+import dk.wegelius.rest.dto.models.Customer;
 import dk.wegelius.rest.service.services.CustomersService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

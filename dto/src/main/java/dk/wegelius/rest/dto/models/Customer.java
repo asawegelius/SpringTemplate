@@ -1,16 +1,27 @@
 package dk.wegelius.rest.dto.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Date;
+
 
 public class Customer {
 
+    @JsonProperty("customerId")
     private long customerId;
+    @JsonProperty("firstName")
     private String firstName;
+    @JsonProperty("lastName")
     private String lastName;
+    @JsonProperty("phoneNumber")
     private String phoneNumber;
+    @JsonProperty("emailAddress")
     private String emailAddress;
+    @JsonProperty("startDate")
     private Date startDate;
+    @JsonProperty("type")
     private CustomerType type;
+
 
     public long getCustomerId() {
         return customerId;
