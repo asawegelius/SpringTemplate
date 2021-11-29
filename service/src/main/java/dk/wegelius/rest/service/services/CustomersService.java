@@ -3,8 +3,10 @@ package dk.wegelius.rest.service.services;
 import dk.wegelius.rest.dao.entities.CustomerEntity;
 import dk.wegelius.rest.dao.repositories.CustomersRepository;
 import dk.wegelius.rest.dto.models.Customer;
+import dk.wegelius.rest.dto.models.DataWrapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,14 +31,37 @@ public class CustomersService {
         return customers;
     }
 
-    public Customer getCustomer(long id) {
+    public DataWrapper<Customer> getCustomer(long id) {
+        DataWrapper<Customer> result = new DataWrapper<>();
         Optional<CustomerEntity> optionalCustomer = customersRepository.findById(id);
         CustomerEntity customerEntity = null;
         if(optionalCustomer.isPresent()){
             customerEntity = optionalCustomer.get();
+            ModelMapper modelMapper = new ModelMapper();
+            Customer customer = modelMapper.map(customerEntity, Customer.class);
+            result.setData(customer);
         }
+        else {
+            result.setMessage(String.format("Could not find Customer with id %d", id));
+            result.setStatus(HttpStatus.BAD_REQUEST);
+        }
+        return result;
+    }
+
+    public DataWrapper<Customer> updateCustomer(Customer customer, long id) {
+        DataWrapper<Customer> result = new DataWrapper<>();
         ModelMapper modelMapper = new ModelMapper();
-        Customer customer = modelMapper.map(customerEntity, Customer.class);
-        return customer;
+        Optional<CustomerEntity> optionalCustomer = customersRepository.findById(id);
+        CustomerEntity customerEntity = null;
+        if(optionalCustomer.isPresent()){
+            customerEntity = modelMapper.map(customer, CustomerEntity.class);
+            customerEntity.setCustomerId(id);
+            Customer customerUpdated = modelMapper.map(customerEntity, Customer.class);
+            result.setData(customerUpdated);
+        } else {
+            result.setMessage(String.format("Could not find Customer with id %d", id));
+            result.setStatus(HttpStatus.BAD_REQUEST);
+        }
+        return  result;
     }
 }

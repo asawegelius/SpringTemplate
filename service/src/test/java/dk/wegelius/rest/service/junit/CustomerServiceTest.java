@@ -43,7 +43,7 @@ public class CustomerServiceTest {
     void testGetCustomer() {
 
         String firstName = "Test";
-        Customer customer = customersService.getCustomer(1L);
+        Customer customer = customersService.getCustomer(1L).getData();
         assertNotNull(customer);
         assertEquals(firstName, customer.getFirstName());
 

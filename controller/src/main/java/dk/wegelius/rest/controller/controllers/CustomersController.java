@@ -2,15 +2,15 @@ package dk.wegelius.rest.controller.controllers;
 
 import dk.wegelius.rest.dao.entities.CustomerEntity;
 import dk.wegelius.rest.dto.models.Customer;
+import dk.wegelius.rest.dto.models.DataWrapper;
 import dk.wegelius.rest.service.services.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("customers")
 public class CustomersController {
@@ -25,7 +25,24 @@ public class CustomersController {
     }
 
     @GetMapping("/{id}")
-    public Customer getCustomer(@PathVariable long id) {
-        return this.customersService.getCustomer(id);
+    public ResponseEntity<Customer> getCustomer(@PathVariable long id) {
+        DataWrapper<Customer> result = this.customersService.getCustomer(id);
+        if(result.getData() != null) {
+            return new ResponseEntity<>(result.getData(), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable long id, @RequestBody Customer customer) {
+        DataWrapper<Customer> result = this.customersService.updateCustomer(customer, id);
+        if(result.getData() != null) {
+            return new ResponseEntity<>(result.getData(), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 }

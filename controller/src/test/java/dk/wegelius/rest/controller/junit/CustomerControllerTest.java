@@ -4,6 +4,7 @@ package dk.wegelius.rest.controller.junit;
 import dk.wegelius.rest.controller.controllers.CustomersController;
 import dk.wegelius.rest.dao.entities.CustomerEntity;
 import dk.wegelius.rest.dto.models.Customer;
+import dk.wegelius.rest.dto.models.DataWrapper;
 import dk.wegelius.rest.service.services.CustomersService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,9 @@ public class CustomerControllerTest {
         testCustomer.setPhoneNumber("12345678");
         testCustomer.setStartDate(new Date(new java.util.Date().getTime()));
 
-        Mockito.when(customersService.getCustomer(testCustomer.getCustomerId())).thenReturn(testCustomer);
+        DataWrapper<Customer> result = new DataWrapper<>();
+        result.setData(testCustomer);
+        Mockito.when(customersService.getCustomer(testCustomer.getCustomerId())).thenReturn(result);
     }
 
     @Test
